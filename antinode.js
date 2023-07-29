@@ -1,11 +1,11 @@
 const p1 = {
-    userName: prompt("What is Player One's Name"),
+    userName: prompt("What is Player One's Name?"),
     score: 0,
     button: document.querySelector('#p1Button'),
     display: document.querySelector('#p1Display')
 }
 const p2 = {
-    userName: prompt("What is Player Two's Name"),
+    userName: prompt("What is Player Two's Name?"),
     score: 0,
     button: document.querySelector('#p2Button'),
     display: document.querySelector('#p2Display')
