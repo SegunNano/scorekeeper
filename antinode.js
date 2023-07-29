@@ -1,56 +1,51 @@
-const  p1Button = document.querySelector('#p1Button');
-const  p2Button = document.querySelector('#p2Button');
+const p1 = {
+    userName: prompt("What is Player One's Name"),
+    score: 0,
+    button: document.querySelector('#p1Button'),
+    display: document.querySelector('#p1Display')
+}
+const p2 = {
+    userName: prompt("What is Player Two's Name"),
+    score: 0,
+    button: document.querySelector('#p2Button'),
+    display: document.querySelector('#p2Display')
+}
+p1.button.textContent = p1.userName;
+p2.button.textContent = p2.userName
 const resetButton = document.querySelector('#reset');
-const p1Display = document.querySelector('#p1Display');
-const p2Display = document.querySelector('#p2Display');
 const winningScoreSelect = document.querySelector('#playto');
 const gameInfo = document.querySelector('#gameInfo')
 
-let p1Score = 0;
-let p2Score = 0;
 let winningScore = 3;
 let isGameOver = false;
+function updateScore(player, opponent) {
+    if(!isGameOver) {
+        addPlus = addition();
+        player.score += addPlus;
+        if (player.score === winningScore) {
+            isGameOver = true;
+            player.display.classList.add('has-text-success');
+            opponent.display.classList.add('has-text-danger');
+            opponent.button.disabled = true;
+            player.button.disabled = true;
+            gameInfo.textContent = `${player.userName} wins the Game`
+        } else {
+            opponent.button.disabled = false;
+            player.button.disabled = true;
+            gameInfo.textContent = `${addPlus} was added to ${player.userName} score`
+        }
+        player.display.textContent = player.score;
+        ;
+    };
+}
 
 
 p1Button.addEventListener('click', function() {
-    if(!isGameOver) {
-        addPlus = addition();
-        p1Score += addPlus;
-        if (p1Score === winningScore) {
-            isGameOver = true;
-            p1Display.classList.add('has-text-success');
-            p2Display.classList.add('has-text-danger');
-            p2Button.disabled = true;
-            p1Button.disabled = true;
-            gameInfo.textContent = `Player 1 wins the Game`
-        } else {
-            p2Button.disabled = false;
-            p1Button.disabled = true;
-            gameInfo.textContent = `${addPlus} was added to Player 1 score`
-        }
-        p1Display.textContent = p1Score;
-        ;
-    };
+    updateScore(p1, p2)
 });
 
 p2Button.addEventListener('click', function() {
-    if(!isGameOver) {
-        addPlus = addition();
-        p2Score += addPlus;
-        if (p2Score === winningScore) {
-            isGameOver = true;
-            p2Display.classList.add('has-text-success');
-            p1Display.classList.add('has-text-danger');
-            p1Button.disabled = true;
-            p2Button.disabled = true;
-            gameInfo.textContent = `Player 2 wins the Game`
-        } else {
-            p1Button.disabled = false;
-            p2Button.disabled = true;
-            gameInfo.textContent = `${addPlus} was added to Player 2 score`
-        }
-        p2Display.textContent = p2Score;
-    };
+    updateScore(p2, p1)
 });
 
 
